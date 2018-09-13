@@ -9,7 +9,7 @@ from flask_bcrypt import Bcrypt
 login_manager = LoginManager()
 bootstrap = Bootstrap()
 db = SQLAlchemy()
-bcrypt = Bcrypt(
+bcrypt = Bcrypt()
 
 
 login_manager.session_protection = 'strong'

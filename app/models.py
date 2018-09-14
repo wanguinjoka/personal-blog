@@ -36,11 +36,13 @@ class Follower(UserMixin,db.Model):
         return check_password_hash(self.hash_pass,password)
 
 class Contributor(UserMixin,db.Model):
-    __tablename__ = 'Contributor'
+    __tablename__ = 'contributor'
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(255), nullable = False)
     email = db.Column(db.String(255),unique = True, nullable = False)
     hash_pass = db.Column(db.String(255), nullable = False)
+
+    blogs = db.relationship('Blog', backref='author', lazy=True)
 
     @property
     def password(self):
@@ -59,8 +61,9 @@ class Contributor(UserMixin,db.Model):
 class Blog(db.Model):
     __tablename__ = 'blog'
     id = db.Column(db.Integer,primary_key = True)
+    title = db.Column(db.String(200),nullable = False)
     date_posted = db.Column(db.DateTime,default=datetime.utcnow)
-    content = db.Column(db.String(200),nullable = False)
+    content = db.Column(db.Text,nullable = False)
     blog_pic_path = db.Column(db.String(), nullable = False, default='/static/profilepic/pic.png')
 
 

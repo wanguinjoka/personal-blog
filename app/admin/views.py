@@ -31,7 +31,7 @@ def login():
         contributor = Contributor.query.filter_by(email = login_form.email.data).first()
         if contributor is not None and contributor.verify_password(login_form.password.data):
             login_user(contributor,login_form.remember.data)
-            return redirect(request.args.get('next') or url_for('main.post'))
+            return redirect(request.args.get('next') or url_for('main.new_blog'))
         else:
             flash('Invalid Email or Password')
 

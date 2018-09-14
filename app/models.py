@@ -61,10 +61,10 @@ class Contributor(UserMixin,db.Model):
 class Blog(db.Model):
     __tablename__ = 'blog'
     id = db.Column(db.Integer,primary_key = True)
-    title = db.Column(db.String(200),nullable = False)
-    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
+    title = db.Column(db.String(1000),nullable = False)
     content = db.Column(db.Text,nullable = False)
-    blog_pic_path = db.Column(db.String(), nullable = False, default='/static/profilepic/pic.png')
+    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
+    blog_pic_path = db.Column(db.String(), nullable = False, default='/static/photos/blog1.jpeg')
 
 
     contributor_id = db.Column(db.Integer, db.ForeignKey('contributor.id'), nullable =False)

@@ -12,16 +12,16 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    blogs = Blog.query.all()
+    blogs = Blog.get_all_blogs()
     # comments = Comment.query.all()
-    return render_template('index.html')
+    return render_template('index.html', blogs = blogs)
 
 @main.route('/blog/new', methods =['GET','POST'])
 @login_required
 def new_blog():
     blog_form = BlogForm()
     if blog_form.validate_on_submit():
-        blog = Blog(content=blog_form.content.data, author=current_user)
+        blog = Blog(title=blog_form.title.data, content=blog_form.content.data, author=current_user)
         db.session.add(blog)
         db.session.commit()
         flash('Your Blog has been created!', 'success')

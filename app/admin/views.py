@@ -18,7 +18,7 @@ def register():
         flash('Your account has been created! You are now able to log in', 'success')
 
         title = "New Account"
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('admin.login'))
 
 
     return render_template('admin/register.html', registration_form=form)

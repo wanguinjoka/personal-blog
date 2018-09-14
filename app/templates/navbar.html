@@ -16,10 +16,10 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
-                <li><a href="{{url_for('main.new_pitch')}}">Write Pitch</a></li>
-                <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
-                  <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+
+                  <li><a href="{{url_for('auth.logout')}}">log out</a></li>
                   {% else %}
+				  <li><a href="{{url_for('auth.login')}}">log In</a></li>
                   <li><a href="{{url_for('auth.register')}}">Sign in</a></li>
 
                 {% endif%}

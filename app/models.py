@@ -11,11 +11,15 @@ def load_follower(follower_id):
 class Follower(UserMixin,db.Model):
     __tablename__ = 'Follower'
     id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255),unique = True, nullable = False)
+    name = db.Column(db.String(255), nullable = False)
     email = db.Column(db.String(255),unique = True, nullable = False)
-    password = db.Column(db.String(60))
+    hash_pass = db.Column(db.String(255), nullable = False)
 
     # comments = db.relationship('Comment', backref='author', lazy=True)
+    @property
+    def password(self):
+        raise AttributeError('You cannot read the password attribute')
+
     @password.setter
     def password(self,password):
         self.hash_pass = generate_password_hash(password)
@@ -25,8 +29,3 @@ class Follower(UserMixin,db.Model):
 
     def verify_password(self,password):
         return check_password_hash(self.hash_pass,password)
-
-        
-    def save_follower(self):
-        db.session.add(self)
-        db.session.commit()

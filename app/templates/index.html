@@ -14,7 +14,7 @@ Coming from a background in design and a passion for System development, here's 
 		<img class="card-img-top" src="{{ blog.blog_pic_path}}" alt="loading image" width="400" height="200px">
 			 <div class="card-body">
                 <h3>{{blog.title}}</h3>
-                 <p>{{blog.content|truncate(300)}}</p>
+                 <p>{{blog.content|truncate(300)}}<a href="{{url_for('main.blog',id=blog.id)}}"></p>
                   <p>By:{{blog.author.name}} on {{blog.date_posted.strftime('%Y-%m-%d')}}</p>
               </div>
 		  </div>

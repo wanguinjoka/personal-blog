@@ -29,3 +29,15 @@ def new_blog():
 
 
     return render_template("create_blog.html", blog_form = blog_form)
+
+@main.route('/blog/<int:id>', methods=['GET','POST'])
+def blog(id):
+    get_blog = Blog.query.get(id)
+    # get_blog_comments = Comment.get_blog_comments(id)
+
+    if get_blog is None:
+        abort(404)
+
+    blog = blog(get_blog.blog_content,extras=["code-friendly", "fenced-code-blocks"])
+
+    return render_template('blog.html', blog_format=blog_format, get_blog=get_blog)

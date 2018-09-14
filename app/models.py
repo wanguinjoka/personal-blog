@@ -55,3 +55,32 @@ class Contributor(UserMixin,db.Model):
 
     def verify_password(self,password):
         return check_password_hash(self.hash_pass,password)
+
+class Blog(db.Model):
+    __tablename__ = 'blog'
+    id = db.Column(db.Integer,primary_key = True)
+    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
+    content = db.Column(db.String(200),nullable = False)
+    blog_pic_path = db.Column(db.String(), nullable = False, default='/static/profilepic/pic.png')
+
+
+    contributor_id = db.Column(db.Integer, db.ForeignKey('contributor.id'), nullable =False)
+
+    # comments = db.relationship('Comment', backref='pitch', lazy=True)
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_all_blogs(cls):
+        blogs = Blog.query.order_by('-id').all()
+        return blogs
+
+    @classmethod
+    def get_single_blog(cls,id):
+        blog = Blog.query.filter_by(id=id).first()
+        return blog
+
+
+    def __repr__(self):
+        return f"Pitch ('{self.content}', '{self.date_posted}','{self.category_id}')"

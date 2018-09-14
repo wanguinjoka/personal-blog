@@ -15,4 +15,18 @@ class Follower(UserMixin,db.Model):
     email = db.Column(db.String(255),unique = True, nullable = False)
     password = db.Column(db.String(60))
 
-    comments = db.relationship('Comment', backref='author', lazy=True)
+    # comments = db.relationship('Comment', backref='author', lazy=True)
+    @password.setter
+    def password(self,password):
+        self.hash_pass = generate_password_hash(password)
+
+    def set_password(self,password):
+        self.hash_pass = generate_password_hash(password)
+
+    def verify_password(self,password):
+        return check_password_hash(self.hash_pass,password)
+
+        
+    def save_follower(self):
+        db.session.add(self)
+        db.session.commit()

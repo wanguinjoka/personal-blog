@@ -7,7 +7,7 @@ from .forms import RegistrationForm
 
 @auth.route('/register', methods = ['GET', 'POST'])
 def register():
-    form = RegistrationFrom()
+    form = RegistrationForm()
     if form.validate_on_submit():
         follower = follower(email = form.email.data,
                     name = form.name.data,

@@ -4,6 +4,8 @@ from .. import db
 from ..models import Contributor, Blog
 from flask_login import login_required,current_user
 from .forms import BlogForm
+from flaskext.markdown import Markdown
+
 
 # Views
 @main.route('/')
@@ -38,6 +40,6 @@ def blog(id):
     if get_blog is None:
         abort(404)
 
-    blog = blog(get_blog.blog_content,extras=["code-friendly", "fenced-code-blocks"])
+    # blog_format = get_blog.blog_content
 
-    return render_template('blog.html', blog_format=blog_format, get_blog=get_blog)
+    return render_template('blog.html', get_blog=get_blog)

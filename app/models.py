@@ -86,4 +86,4 @@ class Blog(db.Model):
 
 
     def __repr__(self):
-        return f"Pitch ('{self.content}', '{self.date_posted}','{self.category_id}')"
+        return f"Blog ('{self.content}', '{self.date_posted}','{self.category_id}')"

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+		<h2> {{get_blog.title}} </h2>
+        <p>{{get_blog.date_posted.strftime('%Y-%m-%d %H:%M')}} | {{get_blog.author.name}} </p>
+		<div class="container">
+
+			{{ get_blog.content }}
+
+		</div>
+
+
+{% endblock %}

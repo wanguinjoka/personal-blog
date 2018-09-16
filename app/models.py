@@ -115,3 +115,18 @@ class Comment(db.Model):
     def get_single_comment(cls,id_blog,id):
         comment = Comment.query.filter_by(blog_id=id_blog,id=id).first()
         return comment
+
+class Subscribers(db.Model):
+    __tablename__='subscribers'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String())
+    email = db.Column(db.String(255))
+
+    def save_subscribers(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def send_single_subscribers(cls,id):
+        subscribers = Subscribers.query.filter_by(id=id).first()
+        return subscribers

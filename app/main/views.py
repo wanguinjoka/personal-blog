@@ -1,10 +1,11 @@
 from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
 from .. import db
-from ..models import Contributor, Blog , Comment
+from ..models import Contributor, Blog , Comment, Subscribers
 from flask_login import login_required,current_user
-from .forms import BlogForm, CommentForm
+from .forms import BlogForm, CommentForm, SubscriberForm
 from flaskext.markdown import Markdown
+from ..email import mail_message
 
 
 # Views
@@ -56,3 +57,17 @@ def blog(id):
     get_comments = Comment.get_blog_comments(id)
 
     return render_template('blog.html', get_blog=get_blog,comment_form=comment_form, get_comments=get_comments, comments_count = len(get_blog_comments))
+
+@main.route('/subscribe',methods = ["GET","POST"])
+def subscribe():
+    form = SubscriberForm()
+    if form.validate_on_submit():
+        subscribers = Subscribers(email = form.email.data, name = form.name.data)
+        db.session.add(subscribers)
+        db.session.commit()
+
+        mail_message("Welcome to my personalblog","emails/subscriber",subscribers.email,subscribers=subscribers)
+
+        return redirect(url_for('main.index'))
+        title = "New Account"
+    return render_template('emails/subscriber.html', subscriber_form = form, subscriber=subscriber)

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
 		<h2> {{get_blog.title}} </h2>
         <p>{{get_blog.date_posted.strftime('%Y-%m-%d %H:%M')}} | {{get_blog.author.name}} </p>
@@ -7,6 +8,16 @@
 			{{ get_blog.content }}
 
 		</div>
+       {{wtf.quick_form(comment_form)}}
+	   {% for comment in get_comments %}
+                    <div class="col-md-12">
+                        <blockquote class="blockquote text-left">
+                            <p class="mb-0"> {{ comment.comment_content}} </p>
+                            <footer class="blockquote-footer"> {{comment.name }} <cite title="Source Title"> {{comment.date_comment.strftime('%Y-%m-%d %H:%M')}} </cite></footer>
+                            
 
+							</blockquote>
+                    </div>
+                {% endfor %}
 
 {% endblock %}

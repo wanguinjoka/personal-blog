@@ -44,8 +44,11 @@ def blog(id):
     comment_form = CommentForm()
     if comment_form.validate_on_submit():
         comment_content = comment_form.comment_content.data
+        comment_name = comment_form.name.data
+        comment_email = comment_form.email.data
 
-        new_comment = Comment(comment_content = comment_content,date_comment = datetime.now(),blog_id=id, author=current_user)
+
+        new_comment = Comment(comment_content = comment_content, name = comment_name, email = comment_email, blog_id=id)
         new_comment.save_comment()
 
         return redirect(url_for('main.blog',id=id))

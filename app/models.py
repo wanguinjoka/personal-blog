@@ -20,7 +20,7 @@ class Follower(UserMixin,db.Model):
     email = db.Column(db.String(255),unique = True, nullable = False)
     hash_pass = db.Column(db.String(255), nullable = False)
 
-    comments = db.relationship('Comment', backref='author', lazy=True)
+    # comments = db.relationship('Comment', backref='author', lazy=True)
     @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
@@ -43,6 +43,7 @@ class Contributor(UserMixin,db.Model):
     hash_pass = db.Column(db.String(255), nullable = False)
 
     blogs = db.relationship('Blog', backref='author', lazy=True)
+    # comments = db.relationship('Comment', backref='writer', lazy=True)
 
     @property
     def password(self):
@@ -93,8 +94,11 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     comment_content = db.Column(db.String())
     date_comment = db.Column(db.DateTime, nullable=False, default = datetime.utcnow)
+    name = db.Column(db.String())
+    email = db.Column(db.String())
 
-    follower_id = db.Column(db.Integer, db.ForeignKey('follower.id'), nullable =False)
+    # Follower_id = db.Column(db.Integer, db.ForeignKey('Follower.id'), nullable =False)
+    # contributor_id = db.Column(db.Integer, db.ForeignKey('contributor.id'), nullable =False)
     blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'))
 
 

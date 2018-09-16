@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
 from .. import db
-from ..models import Contributor, Blog
+from ..models import Contributor, Blog , Comment
 from flask_login import login_required,current_user
-from .forms import BlogForm
+from .forms import BlogForm, CommentForm
 from flaskext.markdown import Markdown
 
 
@@ -35,11 +35,21 @@ def new_blog():
 @main.route('/blog/<int:id>', methods=['GET','POST'])
 def blog(id):
     get_blog = Blog.query.get(id)
-    # get_blog_comments = Comment.get_blog_comments(id)
+    get_blog_comments = Comment.get_blog_comments(id)
 
     if get_blog is None:
         abort(404)
 
     # blog_format = get_blog.blog_content
+    comment_form = CommentForm()
+    if comment_form.validate_on_submit():
+        comment_content = comment_form.comment_content.data
 
-    return render_template('blog.html', get_blog=get_blog)
+        new_comment = Comment(comment_content = comment_content,date_comment = datetime.now(),blog_id=id, author=current_user)
+        new_comment.save_comment()
+
+        return redirect(url_for('main.blog',id=id))
+
+    get_comments = Comment.get_blog_comments(id)
+
+    return render_template('blog.html', get_blog=get_blog,comment_form=comment_form, get_comments=get_comments, comments_count = len(get_blog_comments))

@@ -3,16 +3,12 @@
 ## Built By [Wangui Njoka](https://github.com/wanguinjoka/)
 
 ## Description
-One Minute Pitch - This website will allow you to submit your pitches and other users will vote on them and leave comments to give their feedback on them.
+This blog website will allow you to submit your blogs as a writer and other users will view them and leave comments to give their feedback on them.
 ## User Stories
-submit a pitch in any category.
-see the pitches other people have posted.
-favourite other people's posts
-vote on the pitch they liked by giving it a downvote or upvote.
-comment on the different pitches.
-view the different categories.
-
-
+* View blogs and comment on them
+* Subscribe to the blog and receive notifications
+* As a writer post a blog
+* Delete blog and offensive comments
 ## SetUp / Installation Requirements
 ### Prerequisites
 * python3
@@ -24,8 +20,8 @@ view the different categories.
 ### Cloning
 * In your terminal:
 
-        $ git clone https://oneminutepitchip.herokuapp.com/
-        $ cd oneminutepitch
+        $ git clone https://github.com/wanguinjoka/personal-blog
+        $ cd personal-blog
         $ pip install -r requirements.txt
         $ export SECRET_KEY='{Your Secret Key}'
         $ export DATABASE_URL='postgresql+psycopg2://{Your username}:{password}@localhost/Your database name}'

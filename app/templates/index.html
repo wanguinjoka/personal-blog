@@ -2,20 +2,22 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {%block content%}
-<div class="container">
+<div style="color: white; text-align: center;" class="container">
 <h1>Here's what's on my mind.</h1>
 Coming from a background in design and a passion for System development, here's where I provide insight into my career, my passions and my life.
 </div>
 <div class ="container">
     <div class="row">
+
 {% for blog in blogs %}
-<div style="color:black;padding:20px;"class = "container">
-    <div class="thumbnail col-md-4" style="width:350px; height:420px;">
-		<img class="card-img-top" src="{{ blog.blog_pic_path}}" alt="loading image" width="400" height="200px">
+
+       <div style="color:white; padding:20px;"class = "container">
+          <!-- <div class="thumbnail col-md-3" style="width:350px; height:420px;"> -->
+		  <img class="card-img-top" src="static/photos/blog1.jpeg" alt="loading image" width="400" height="200px">
 			 <div class="card-body">
                 <h3>{{blog.title}}</h3>
                  <p>{{blog.content|truncate(300)}}<a href="{{url_for('main.blog',id=blog.id)}}"> Read more</a></p>
-                  <p>By:{{blog.author.name}} on {{blog.date_posted.strftime('%Y-%m-%d')}}</p>
+                  <p style="color: white;">By:{{blog.author.name}} on {{blog.date_posted.strftime('%Y-%m-%d')}}</p>
               </div>
 		  </div>
 	  </div>

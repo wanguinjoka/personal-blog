@@ -65,7 +65,7 @@ class Blog(db.Model):
     title = db.Column(db.String(1000),nullable = False)
     content = db.Column(db.Text,nullable = False)
     date_posted = db.Column(db.DateTime,default=datetime.utcnow)
-    blog_pic_path = db.Column(db.String(), nullable = False, default='/static/photos/blog1.jpeg')
+    blog_pic_path = db.Column(db.String(), nullable = True)
 
 
     contributor_id = db.Column(db.Integer, db.ForeignKey('contributor.id'), nullable =False)

@@ -28,7 +28,7 @@ This blog website will allow you to submit your blogs as a writer and other user
         $ ./start.sh
 
 ## live link to the application
-* https://personal-blog-ip.herokuapp.com/
+* https://personal-blog-ip4.herokuapp.com/
 
 ## Technologies Used
 * Python3

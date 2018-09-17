@@ -60,14 +60,14 @@ def blog(id):
 
 @main.route('/subscribe',methods = ["GET","POST"])
 def subscribe():
-    form = SubscriberForm()
-    if form.validate_on_submit():
-        subscribers = Subscribers(email = form.email.data, name = form.name.data)
+    subscriber_form = SubscriberForm()
+    if subscriber_form.validate_on_submit():
+        subscribers = Subscribers(email = subscriber_form.email.data, name = subscriber_form.name.data)
         db.session.add(subscribers)
         db.session.commit()
 
-        mail_message("Welcome to my personalblog","emails/subscriber",subscribers.email,subscribers=subscribers)
+        mail_message("Welcome to my personalblog","emails/welcome",subscribers.email,subscribers=subscribers)
 
         return redirect(url_for('main.index'))
         title = "New Account"
-    return render_template('emails/subscriber.html', subscriber_form = form, subscriber=subscriber)
+    return render_template('emails/subscriber.html', subscriber_form = subscriber_form)

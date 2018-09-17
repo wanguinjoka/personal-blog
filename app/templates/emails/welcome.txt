@@ -1,0 +1,3 @@
+Hello {{subscribers.name}}
+Welcome to My personal blog
+We have just seen you have subscribe to our application and want to welcome you to the family. Please enjoy the blog stories and fill free to comment or email us..

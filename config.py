@@ -14,7 +14,7 @@ class ProdConfig(Config):
 
 class DevConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wanguinjoka:hakiizzy@localhost/personalblog'
+    
 
 config_options = {
 'development':DevConfig,
